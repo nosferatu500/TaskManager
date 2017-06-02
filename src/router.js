@@ -7,16 +7,14 @@ import TaskEdit from './components/TaskEdit';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      <Scene key="main">
-        <Scene 
-          onRight={() => Actions.taskCreate()} 
-          rightTitle="Add Task"
-          key="taskList" 
-          component={TaskList} 
-          title="Task List" 
-          initial
-        />      
-      </Scene>
+      <Scene 
+        onRight={() => Actions.taskCreate()} 
+        rightTitle="Add Task"
+        key="taskList" 
+        component={TaskList} 
+        title="Task List" 
+        initial
+      />      
 
       <Scene title="Create Task" component={TaskCreate} key="taskCreate" />
       <Scene title="Edit Task" component={TaskEdit} key="taskEdit" />
