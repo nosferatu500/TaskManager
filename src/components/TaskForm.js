@@ -81,12 +81,12 @@ class TaskForm extends Component {
         
         <CardSection>
           <Text>Complete Date</Text>
-          {this.onPickDate()}
+          {this.setCompleteDate()}
         </CardSection>
         
         <CardSection>
           <Text>Status</Text>
-          {this.onPickDate()}
+          {this.setStatus()}
         </CardSection>
         
       </View>
