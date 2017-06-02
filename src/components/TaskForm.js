@@ -9,7 +9,7 @@ class TaskForm extends Component {
   onPickDate() {
     return (<DatePicker
             style={{ width: 200 }}
-            date={this.state.date}
+            date={this.props.date}
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
@@ -76,17 +76,17 @@ class TaskForm extends Component {
         
         <CardSection>
           <Text>Date</Text>
-          {this.props.onPickDate()}
+          {this.onPickDate()}
         </CardSection>
         
         <CardSection>
           <Text>Complete Date</Text>
-          {this.props.onPickDate()}
+          {this.onPickDate()}
         </CardSection>
         
         <CardSection>
           <Text>Status</Text>
-          {this.props.onPickDate()}
+          {this.onPickDate()}
         </CardSection>
         
       </View>
