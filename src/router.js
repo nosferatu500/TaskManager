@@ -11,9 +11,6 @@ const RouterComponent = () => {
         onRight={() => Actions.taskCreate()} 
         rightTitle="Add Task"
 
-        onLeft={() => Actions.taskList()}
-        leftTitle="Filter"
-
         key="taskList" 
         component={TaskList} 
         title="Task List" 

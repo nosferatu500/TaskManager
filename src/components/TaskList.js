@@ -12,32 +12,35 @@ class TaskList extends Component {
   componentWillMount() {
     this.props.tasksFetch();
     
-    this.createDataSource(this.props);    
+    this.createDataSource(this.props, this.state.filter);    
   }
 
   componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps); 
+    this.createDataSource(nextProps, this.state.filter); 
   }
 
   setFilter(text) {
     this.setState({ filter: text });
-    this.createDataSource(this.props); 
+    this.createDataSource(this.props, text); 
+    console.log(text)
   }
 
-  createDataSource({ tasks }) {
+  createDataSource({ tasks }, text) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    this.dataSource = ds.cloneWithRows(this.sortFilter(tasks));
+    this.dataSource = ds.cloneWithRows(this.sortFilter(tasks, text));
   }
 
-  sortFilter(tasks) {
-    const filteredTasks = this.state.filter
-      ? tasks.filter(task => {
-          return task.important.indexOf(this.state.filter) > -1;
-        })
-      : tasks;
-      console.log(filteredTasks)
+  sortFilter(tasks, text) {
+    console.log(text)
+    if (text === 'All' || text === null) {
+      return tasks;
+    } 
+    const filteredTasks = tasks.filter(task => {
+          return task.important.indexOf(text) > -1;
+    });
+      console.log(text)
     return filteredTasks;
   }
 
@@ -55,6 +58,8 @@ class TaskList extends Component {
             onValueChange={text => 
               this.setFilter(text)}
           >
+            <Picker.Item label="Select Filter" />
+            <Picker.Item label="All" value="All" />
             <Picker.Item label="Easy" value="Easy" />
             <Picker.Item label="Normal" value="Normal" />
             <Picker.Item label="Hard" value="Hard" />
