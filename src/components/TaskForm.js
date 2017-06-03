@@ -66,7 +66,8 @@ class TaskForm extends Component {
           <Picker
             style={{ flex: 1 }}
             selectedValue={this.props.important}  
-            onValueChange={important => this.props.taskUpdate({ prop: 'important', value: important })}
+            onValueChange={important => 
+              this.props.taskUpdate({ prop: 'important', value: important })}
           >
             <Picker.Item label="Easy" value="Easy" />
             <Picker.Item label="Normal" value="Normal" />

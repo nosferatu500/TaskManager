@@ -1,9 +1,7 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { Text, ScrollView, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { taskDelete, taskUpdate, taskSave } from '../actions';
+import { taskDelete, taskUpdate, taskSave, taskEdit } from '../actions';
 import { CardSection, Card, Button, Confirm } from './common';
 
 class ListItem extends Component {
@@ -21,7 +19,7 @@ class ListItem extends Component {
   } 
 
   onEditPress() {
-    Actions.taskEdit({ task: this.props.task });
+    this.props.taskEdit(this.props.task);
   }
 
   onCompletePress() {
@@ -40,7 +38,7 @@ class ListItem extends Component {
 
   setColor() {
     if (this.props.task.date < new Date().toLocaleDateString()) {
-      console.log(new Date().toLocaleDateString(), this.props.task.date)
+      console.log(new Date().toLocaleDateString(), this.props.task.date);
       return 'red';
     }
   }
@@ -53,7 +51,7 @@ class ListItem extends Component {
   }
 
   render() {
-    const { title, date, completeDate } = this.props.task;
+    const { title, description, date, completeDate, important, status } = this.props.task;
 
     return (
         <ScrollView>
@@ -63,11 +61,20 @@ class ListItem extends Component {
                 <Text style={styles.titleStyle}>
                   {title}
                 </Text>
+                <Text style={styles.titleStyle}>
+                  {description}
+                </Text>
+                <Text>
+                  Important: {important}
+                </Text>
                 <Text>
                   Date: {date}
                 </Text>
                 <Text>
                   Completed: {completeDate}
+                </Text>
+                <Text>
+                  Status: {status}
                 </Text>
               </View>
             </CardSection>
@@ -115,4 +122,4 @@ const mapStateToProps = (state) => {
   return { title, description, important, date, completeDate, status };
 };
 
-export default connect(mapStateToProps, { taskDelete, taskUpdate, taskSave })(ListItem);
+export default connect(mapStateToProps, { taskDelete, taskUpdate, taskSave, taskEdit })(ListItem);

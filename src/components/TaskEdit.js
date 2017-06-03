@@ -9,15 +9,24 @@ class TaskEdit extends Component {
   state = { showModal: false }
 
   componentWillMount() {
-    _.each(this.props.task, (value, prop) => {
+   /* _.each(this.props.task, (value, prop) => {
       this.props.taskUpdate({ prop, value });
-    });
+    });*/
+    console.log(this.props)
   }
 
   onButtonPress() {
     const { title, description, important, date, completeDate, status } = this.props;
 
-    this.props.taskSave({ title, description, important, date, completeDate, status, uid: this.props.task.uid });
+    this.props.taskSave({ 
+      title, 
+      description, 
+      important, 
+      date, 
+      completeDate, 
+      status, 
+      uid: this.props.task.uid 
+    });
   }
 
   onAccept() {
@@ -33,7 +42,7 @@ class TaskEdit extends Component {
   render() {
     return (
       <Card>
-        <TaskForm {...this.props} />
+        <TaskForm />
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
             Save

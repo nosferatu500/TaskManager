@@ -8,7 +8,14 @@ class TaskCreate extends Component {
   onButtonPress() {
     const { title, description, important, date, completeDate, status } = this.props;
 
-    this.props.taskCreate({ title, description, important, date, completeDate, status });
+    this.props.taskCreate({ 
+      title, 
+      description, 
+      important: (important === null) ? 'Easy' : important, 
+      date, 
+      completeDate, 
+      status 
+    });
   }
 
   render() {

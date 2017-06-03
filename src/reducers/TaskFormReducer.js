@@ -1,6 +1,13 @@
 import { TASK_UPDATE, TASK_CREATE, TASK_SAVE_SUCCESS } from '../actions/types';
 
-const INITIAL_STATE = { title: '', description: '', important: '', date: '', completeDate: '', status: '' };
+const INITIAL_STATE = { 
+  title: '', 
+  description: '', 
+  important: null, 
+  date: '', 
+  completeDate: '', 
+  status: '' 
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
