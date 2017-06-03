@@ -54,9 +54,3 @@ export const taskDelete = ({ uid }) => {
       });
   };
 };
-
-export const taskEdit = ({ task }) => {
-  return () => {
-        Actions.taskEdit();
-  };
-};
