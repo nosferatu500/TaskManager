@@ -33,7 +33,7 @@ class TaskEdit extends Component {
   render() {
     return (
       <Card>
-        <TaskForm />
+        <TaskForm {...this.props} />
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
             Save

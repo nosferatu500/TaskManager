@@ -12,9 +12,9 @@ class TaskForm extends Component {
             date={this.props.date}
             mode="date"
             placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2015-05-01"
-            maxDate="2018-06-01"
+            format="DD.MM.YYYY"
+            minDate="01.05.2015"
+            maxDate="01.05.2018"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={{
