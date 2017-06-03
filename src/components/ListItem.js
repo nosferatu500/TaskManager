@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Text, ScrollView } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { taskDelete, taskUpdate, taskSave } from '../actions';
@@ -38,22 +38,38 @@ class ListItem extends Component {
     });
   }
 
+  setColor() {
+    if (this.props.task.date < new Date().toLocaleDateString()) {
+      console.log(new Date().toLocaleDateString(), this.props.task.date)
+      return 'red';
+    }
+  }
+
+  cardStatusStyle() {
+    return {
+     borderRadius: 10,
+     backgroundColor: this.setColor(),
+   };
+  }
+
   render() {
     const { title, date, completeDate } = this.props.task;
 
     return (
         <ScrollView>
           <Card>
-            <CardSection>
-              <Text style={styles.titleStyle}>
-                {title}
-              </Text>
-              <Text>
-                {date}
-              </Text>
-              <Text>
-                Completed: {completeDate}
-              </Text>
+            <CardSection style={this.cardStatusStyle()}>
+              <View>
+                <Text style={styles.titleStyle}>
+                  {title}
+                </Text>
+                <Text>
+                  Date: {date}
+                </Text>
+                <Text>
+                  Completed: {completeDate}
+                </Text>
+              </View>
             </CardSection>
 
             <CardSection>
@@ -87,6 +103,9 @@ const styles = {
   titleStyle: {
     fontSize: 18,
     paddingLeft: 15
+  },
+  cardStatusStyle: {
+
   }
 };
 
