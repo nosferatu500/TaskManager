@@ -1,15 +1,17 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView } from 'react-native';
+import { ListView, View, Text, Picker } from 'react-native';
 import { tasksFetch } from '../actions';
+import { CardSection } from './common';
 import ListItem from './ListItem';
 
 class TaskList extends Component {
+  state = { filter: null }
 
   componentWillMount() {
     this.props.tasksFetch();
-
+    
     this.createDataSource(this.props);    
   }
 
@@ -17,12 +19,26 @@ class TaskList extends Component {
     this.createDataSource(nextProps); 
   }
 
+  setFilter(text) {
+    this.setState({ filter: text });
+    this.createDataSource(this.props); 
+  }
+
   createDataSource({ tasks }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
+    this.dataSource = ds.cloneWithRows(this.sortFilter(tasks));
+  }
 
-    this.dataSource = ds.cloneWithRows(tasks);
+  sortFilter(tasks) {
+    const filteredTasks = this.state.filter
+      ? tasks.filter(task => {
+          return task.important.indexOf(this.state.filter) > -1;
+        })
+      : tasks;
+      console.log(filteredTasks)
+    return filteredTasks;
   }
 
   renderRow(task) {
@@ -31,11 +47,26 @@ class TaskList extends Component {
 
   render() {
     return (
+    <View>
+      <CardSection>
+          <Text>Filter</Text>
+          <Picker
+            style={{ flex: 1 }}
+            onValueChange={text => 
+              this.setFilter(text)}
+          >
+            <Picker.Item label="Easy" value="Easy" />
+            <Picker.Item label="Normal" value="Normal" />
+            <Picker.Item label="Hard" value="Hard" />
+          </Picker>
+        </CardSection>
       <ListView 
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={this.renderRow}
       />
+</View>
+      
     );
   }
 }
